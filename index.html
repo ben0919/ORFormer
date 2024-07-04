@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>ORFormer</title>
+
+    <style>
+    .responsive
+    {
+    width: 100%
+    }
+    </style>
+
+    <style type="text/css">
+        /* Add a container class to center the table */
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh; /* Adjust the height if needed */
+            margin-top: 0px;
+        }
+
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+            overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-eiei{background-color:#ffffff;border-color:#9b9b9b;color:#009901;font-weight:bold;text-align:center;vertical-align:middle}
+        .tg .tg-7s0l{background-color:#ffffff;border-color:#9b9b9b;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+        .tg .tg-jb0k{background-color:#ffffff;border-color:#9b9b9b;color:#000000;text-align:center;vertical-align:middle}
+    </style>
+
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦊</text></svg>">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    
+    <script src="js/app.js"></script>
+    <script src="js/video_comparison.js"></script>
+    <script src="js/result.js"></script>
+
+
+</head>
+
+
+
+
+<body>
+
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>ORFormer</b>: Occlusion-Robust Transformer
+            </br>
+                   for Accurate Facial Landmark Detection</br> 
+                <small>
+                WACV 2025 Oral
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://github.com/ben0919">
+                          Jui-Che Chiang
+                        </a>
+                        </br>NYCU, NVIDIA
+                    </li>
+                    <li>
+                        <a href="https://eborboihuc.github.io/">
+                          Hou-Ning Hu
+                        </a>
+                        </br>MediaTek
+                    </li>
+                    <li>
+                      <a>
+                        Bo-Syuan Hou
+                      </a>
+                      </br>NYCU
+                    </li>
+                    <li>
+                      <a>
+                        Chia-Yu Tseng
+                      </a>
+                      </br>NYCU
+                    </li>
+                    <li>
+                        <a href="https://yulunalexliu.github.io/">
+                          Yu-Lun Liu
+                        </a>
+                        </br>NYCU
+                    </li>
+                    <li>
+                        <a href="https://minhungchen.netlify.app/">
+                          Min-Hung Chen
+                        </a>
+                        </br>NVIDIA
+                    </li>
+                    <li>
+                        <a href="https://sites.google.com/site/yylinweb/">
+                          Yen-Yu Lin
+                        </a>
+                        </br>NYCU
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://arxiv.org/abs/2412.13174">
+                            <image src="img/paper.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/ben0919/ORFormer">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+<br>
+
+        <div class="section">
+          <!-- Icon Section -->
+          <div class="row center">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="image-container">
+                <img class="responsive-img" src="img/teaser.png" alt="Image Description" width="100%">
+              </div>
+            </div>
+          </div>
+        </div>
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                  Although facial landmark detection (FLD) has gained significant progress, existing FLD methods still suffer from performance drops on partially non-visible faces, such as faces with occlusions or under extreme lighting conditions or poses. To address this issue, we introduce ORFormer, a novel transformer-based method that can detect non-visible regions and recover their missing features from visible parts. Specifically, ORFormer associates each image patch token with one additional learnable token called the messenger token. The messenger token aggregates features from all but its patch. This way, the consensus between a patch and other patches can be assessed by referring to the similarity between its regular and messenger embeddings, enabling non-visible region identification. Our method then recovers occluded patches with features aggregated by the messenger tokens. Leveraging the recovered features, ORFormer compiles high-quality heatmaps for the downstream FLD task. Extensive experiments show that our method generates heatmaps resilient to partial occlusions. By inte- grating the resultant heatmaps into existing FLD methods, our method performs favorably against the state of the arts on challenging datasets such as WFLW and COFW.
+                </p>
+            </div>
+        </div>
+
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Overview
+                </h3>
+                <br>
+                <image src="img/overview.png" alt="overview" width="100%"></image>
+                <br>
+                <p class="text-justify">
+                  (a) We first train a quantized heatmap generator, which takes an image <i>I</i> as input and generates its edge heatmaps <i>H</i>. After pre-training, the prior knowledge of unoccluded faces is encoded in the codebook <i>C</i> and decoder <i>D</i>. (b) With the frozen codebook and decoder, we introduce ORFormer to generate the occlusion map <i>&alpha;</i> and two code sequences <i>S<sub>I</sub></i> and <i>S<sub>M</sub></i>, leading to quantized features <i>Z<sub>I</sub></i> and <i>Z<sub>M</sub></i>. The recovered feature <i>Z<sub>rec</sub></i>is yielded by merging <i>Z<sub>I</sub></i> and <i>S<sub>M</sub></i> with patch-specific weights given in <i>&alpha;</i>, and is used to produce occlusion-robust heatmaps <i>H<sub>rec</sub></i>.
+                </p>
+            </div>
+        </div>
+
+<br>
+
+
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Occlusion-Robust Transformer (ORFormer)
+                </h3>
+                <br>
+                <image src="img/ORFormer.png" alt="ORFormer" width="100%"></image>
+                <br>
+                <p class="text-justify">
+                ORFormer takes image patches <i>P</i> as input and generates two code sequences <i>S<sub>I</sub></i> and <i>S<sub>M</sub></i> via the codebook prediction head. While <i>S<sub>I</sub></i> is computed by referring to the image patch tokens, <i>S<sub>M</sub></i> is by the messenger tokens. The occlusion map <i>&alpha;</i> represents the patch-specific occlusion likelihood and is inferred by the occlusion detection head.
+                </p>
+            </div>
+        </div>
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Integration with FLD
+                </h3>
+                <br>
+                <image src="img/integration.png" alt="integration" width="100%"></image>
+                <br>
+                <p class="text-justify">
+                  ORFormer is adopted for occlusion detection and feature recovery, resulting in high-quality heatmaps. The generated heatmaps serve as an extra input to an FLD method, and offer the recovered features to make the FLD method robust to occlusions..
+                </p>
+            </div>
+        </div>
+
+<br>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+              <h3>
+                  Quantitative Results
+              </h3>
+              <br>
+              <image src="img/quantitative.png" alt="quantitative" width="100%"></image>
+              <br>
+              <p class="text-justify">
+                Quantitative comparison with state-of-the-art methods on WFLW, COFW, and 300W. NME is reported for all datasets. For WFLW, FR and AUC with a threshold of 10% are included. The best and second best results are highlighted. The &dagger; symbol represents the results we reproduced.
+              </p>
+          </div>
+        </div>
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Qualitative Results
+                </h3>
+                <br>
+                <image src="img/qualitative.png" alt="qualitative" width="100%"></image>
+                <br>
+                <p class="text-justify">
+                  Qualitative comparison with the reproduced baseline method, STAR, on extreme cases from the test set of WFLW. The ground-truth landmarks are marked in blue, while the predicted landmarks are in red. The green lines represent the distance between the ground-truth landmarks and the predicted landmarks. Orange ellipses highlight variations between the methods in thechallenging areas.
+                </p>
+            </div>
+        </div>
+
+<br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+      <h3>
+          Alpha Map Visualization
+      </h3>
+      <br>
+      <image src="img/alpha.png" alt="alpha" width="100%"></image>
+      <br>
+      <p class="text-justify">
+        Visualization of the &alpha; maps yielded by ORFormer. Red regions indicate higher values of &alpha;, suggesting heavier feature occlusion or corruption detected by ORFormer.
+      </p>
+  </div>
+</div>
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <!-- <div class="form-group col-md-30 col-md-offset-1"> -->
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+                        @article{chiang2024orformer,
+                            title={ORFormer: Occlusion-Robust Transformer for Accurate Facial Landmark Detection},
+                            author={Chiang, Jui-Che and Hu, Hou-Ning and Hou, Bo-Syuan and Tseng, Chia-Yu and Liu, Yu-Lun and Chen, Min-Hung and Lin, Yen-Yu},
+                            journal={arXiv preprint arXiv:2412.13174},
+                            year={2024}
+                          }
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                This work was supported in part by the National Science and Technology Council (NSTC) under grants 112-2221-E-A49-090-MY3, 111-2628-E-A49-025-MY3, 112-2634-F-006-002, and 113-2640-E-006-006. This work was funded in part by MediaTek.
+                    <br><br>
+                The website template was borrowed from <a href="https://skchen1993.github.io/CEVR_web/">CEVR</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
