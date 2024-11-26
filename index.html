@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>ORFormer</title>
+
+    <style>
+    .responsive
+    {
+    width: 100%
+    }
+    </style>
+
+    <style type="text/css">
+        /* Add a container class to center the table */
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh; /* Adjust the height if needed */
+            margin-top: 0px;
+        }
+
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+            overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-eiei{background-color:#ffffff;border-color:#9b9b9b;color:#009901;font-weight:bold;text-align:center;vertical-align:middle}
+        .tg .tg-7s0l{background-color:#ffffff;border-color:#9b9b9b;color:#000000;font-weight:bold;text-align:center;vertical-align:middle}
+        .tg .tg-jb0k{background-color:#ffffff;border-color:#9b9b9b;color:#000000;text-align:center;vertical-align:middle}
+    </style>
+
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦊</text></svg>">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    
+    <script src="js/app.js"></script>
+    <script src="js/video_comparison.js"></script>
+    <script src="js/result.js"></script>
+
+
+</head>
+
+
+
+
+<body>
+
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>ORFormer</b>: Occlusion-Robust Transformer
+            </br>
+                   for Accurate Facial Landmark Detection</br> 
+                <small>
+                WACV 2025
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://eborboihuc.github.io/">
+                          Jui-Che Chiang
+                        </a>
+                        </br>NYCU, NVIDIA
+                    </li>
+                    <li>
+                        <a href="https://eborboihuc.github.io/">
+                          Hou-Ning Hu
+                        </a>
+                        </br>MediaTek
+                    </li>
+                    <li>
+                      <a>
+                        Bo-Syuan Hou
+                      </a>
+                      </br>NYCU
+                    </li>
+                    <li>
+                      <a>
+                        Chia-Yu Tseng
+                      </a>
+                      </br>NYCU
+                    </li>
+                    <li>
+                        <a href="https://yulunalexliu.github.io/">
+                          Yu-Lun Liu
+                        </a>
+                        </br>NYCU
+                    </li>
+                    <li>
+                        <a href="https://minhungchen.netlify.app/">
+                          Min-Hung Chen
+                        </a>
+                        </br>NVIDIA
+                    </li>
+                    <li>
+                        <a href="https://sites.google.com/site/yylinweb/">
+                          Yen-Yu Lin
+                        </a>
+                        </br>NYCU
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://github.com/ben0919/ORFormer">
+                            <image src="img/paper.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/ben0919/ORFormer">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+<br>
+
+        <div class="section">
+          <!-- Icon Section -->
+          <div class="row center">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="image-container">
+                <img class="responsive-img" src="img/teaser.png" alt="Image Description" width="100%">
+              </div>
+            </div>
+          </div>
+        </div>
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                  Although facial landmark detection (FLD) has gained significant progress, existing FLD methods still suffer from performance drops on partially non-visible faces, such as faces with occlusions or under extreme lighting conditions or poses. To address this issue, we introduce ORFormer, a novel transformer-based method that can detect non-visible regions and recover their missing features from visible parts. Specifically, ORFormer associates each image patch token with one additional learnable token called the messenger token. The messenger token aggregates features from all but its patch. This way, the consensus between a patch and other patches can be assessed by referring to the similarity between its regular and messenger embeddings, enabling non-visible region identification. Our method then recovers occluded patches with features aggregated by the messenger tokens. Leveraging the recovered features, ORFormer compiles high-quality heatmaps for the downstream FLD task. Extensive experiments show that our method generates heatmaps resilient to partial occlusions. By inte- grating the resultant heatmaps into existing FLD methods, our method performs favorably against the state of the arts on challenging datasets such as WFLW and COFW.
+                </p>
+            </div>
+        </div>
+
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Overview
+                </h3>
+                <br>
+                <image src="img/overview.png" alt="overview" width="100%"></image>
+                <br>
+                <p class="text-justify">
+                  (a) We first train a quantized heatmap generator, which takes an image <i>I</i> as input and generates its edge heatmaps <i>H</i>. After pre-training, the prior knowledge of unoccluded faces is encoded in the codebook <i>C</i> and decoder <i>D</i>. (b) With the frozen codebook and decoder, we introduce ORFormer to generate the occlusion map <i>&alpha;</i> and two code sequences <i>S<sub>I</sub></i> and <i>S<sub>M</sub></i>, leading to quantized features <i>Z<sub>I</sub></i> and <i>Z<sub>M</sub></i>. The recovered feature <i>Z<sub>rec</sub></i>is yielded by merging <i>Z<sub>I</sub></i> and <i>S<sub>M</sub></i> with patch-specific weights given in <i>&alpha;</i>, and is used to produce occlusion-robust heatmaps <i>H<sub>rec</sub></i>.
+                </p>
+            </div>
+        </div>
+
+<br>
+
+
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Occlusion-Robust Transformer (ORFormer)
+                </h3>
+                <br>
+                <image src="img/ORFormer.png" alt="ORFormer" width="100%"></image>
+                <br>
+                <p class="text-justify">
+                ORFormer takes image patches <i>P</i> as input and generates two code sequences <i>S<sub>I</sub></i> and <i>S<sub>M</sub></i> via the codebook prediction head. While <i>S<sub>I</sub></i> is computed by referring to the image patch tokens, <i>S<sub>M</sub></i> is by the messenger tokens. The occlusion map <i>&alpha;</i> represents the patch-specific occlusion likelihood and is inferred by the occlusion detection head.
+                </p>
+            </div>
+        </div>
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Integration with FLD
+                </h3>
+                <br>
+                <image src="img/integration.png" alt="integration" width="100%"></image>
+                <br>
+                <p class="text-justify">
+                  ORFormer is adopted for occlusion detection and feature recovery, resulting in high-quality heatmaps. The generated heatmaps serve as an extra input to an FLD method, and offer the recovered features to make the FLD method robust to occlusions..
+                </p>
+            </div>
+        </div>
+
+<br>
+
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    LDR images generation with arbitrary EVs
+                </h3>
+                <p class="text-justify">
+                CEVR visual results on the VDS and HDREye dataset!!
+                </p>
+                    <div class="image-container_result">
+                          <img src="img/Result_Website_LDR.png" class="responsive"
+                          onmouseover="changeImage(1,this)"
+                          onmouseout="changeImage(2,this)">
+                    </div>
+                </p>
+            </div>
+        </div>
+<br> -->
+        <!-- <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3>
+                    Evaluation Result
+                    </h3>
+                    <p class="text-justify">
+                    The ZIP file contain "results of each related work" and "the matlab script for evaluation". You can simply download the ZIP file and run the script to get the PSNR, HDR-VDP-2 score for tonemapped image and HDR file. (We evaluate on two datasets, VDS dataset and HDREye dataset, which are also in the ZIP file.) 
+                    </p>
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://drive.google.com/file/d/1xeCT3APYkTnxeotb_t0wxdSPzBLbnU_p/view?usp=sharing">
+                            <image src="img/ZIPImage.png" height="60px">
+                                <h4><strong>Data and script</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div> -->
+
+
+        
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Evaluation results (3.3G)
+                </h3>
+                <!-- <p class="text-justify">
+                CEVR visual results on the VDS and HDREye dataset!!
+                </p> -->
+                <br>
+                    <div class="one" onmouseout="ccc_stop()" onmouseover="ccc_start()">
+                      <div class="two" id='ccc_image'><a href="https://drive.google.com/file/d/1xeCT3APYkTnxeotb_t0wxdSPzBLbnU_p/view?usp=sharing"><img src='img/Result_Website_HDR.png' class="responsive"></a></div>
+                      <a href="https://drive.google.com/file/d/1xeCT3APYkTnxeotb_t0wxdSPzBLbnU_p/view?usp=sharing"><img src='img/Result_Website_LDR.png' class="responsive"></a>
+                    </div>
+                    <script type="text/javascript">
+                      function ccc_start() {
+                        document.getElementById('ccc_image').style.opacity = "1";
+                      }
+
+                      function ccc_stop() {
+                        document.getElementById('ccc_image').style.opacity = "0";
+                      }
+                      ccc_stop()
+                    </script>
+                    <br>
+                  <p class="text-justify">
+                    We provide a <a href="https://drive.google.com/file/d/1xeCT3APYkTnxeotb_t0wxdSPzBLbnU_p/view?usp=sharing">ZIP file</a> containing each compared method's results and the Matlab script for the evaluation of two datasets: the VDS dataset and the HDREye dataset. You can download the ZIP file and run the script to get the PSNR, HDR-VDP-2 score for the tone-mapped image, and HDR file.
+                  </p>
+                </p>
+            </div>
+        </div>
+
+
+<br>
+        <div class="section">
+          <!-- Icon Section -->
+          <div class="row center">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Quantitative results
+                </h3>
+<!--                   <div class="image-container">
+                    <img class="responsive-img" src="img/CEVR_Teaser.png" alt="Image Description">
+                  </div> -->
+                <!-- <div class="table-container"> -->
+                    <!-- <table class="tg"> -->
+                  <div class="table_wrapper">
+                    <table class="table is-hoverable is-bordered">
+                        <thead>
+                          <tr>
+                            <th class="tg-7s0l" rowspan="3">Dataset</th>
+                            <th class="tg-7s0l" rowspan="3">Method</th>
+                            <th class="tg-7s0l" colspan="2">PSNR</th>
+                            <th class="tg-7s0l" colspan="2">PSNR</th>
+                            <th class="tg-7s0l" colspan="2" rowspan="2">HDR-VDP-2</th>
+                          </tr>
+                          <tr>
+                            <th class="tg-7s0l" colspan="2">RH's TMO</th>
+                            <th class="tg-7s0l" colspan="2">KK's TMO</th>
+                          </tr>
+                          <tr>
+                            <th class="tg-7s0l">mean</th>
+                            <th class="tg-7s0l">std</th>
+                            <th class="tg-7s0l">mean</th>
+                            <th class="tg-7s0l">std</th>
+                            <th class="tg-7s0l">mean</th>
+                            <th class="tg-7s0l">std</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="tg-jb0k" rowspan="6">VDS</td>
+                            <td class="tg-jb0k">DrTMO</td>
+                            <td class="tg-jb0k">25.49</td>
+                            <td class="tg-jb0k">4.28</td>
+                            <td class="tg-jb0k">21.36</td>
+                            <td class="tg-jb0k">4.50</td>
+                            <td class="tg-jb0k">54.33</td>
+                            <td class="tg-jb0k">6.27</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Deep chain HDRi</td>
+                            <td class="tg-jb0k">30.86</td>
+                            <td class="tg-jb0k">3.36</td>
+                            <td class="tg-jb0k">24.54</td>
+                            <td class="tg-jb0k">4.01</td>
+                            <td class="tg-jb0k">56.36</td>
+                            <td class="tg-jb0k">4.41</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Deep recursive HDRI</td>
+                            <td class="tg-jb0k">32.99</td>
+                            <td class="tg-jb0k">2.81</td>
+                            <td class="tg-jb0k">28.02</td>
+                            <td class="tg-jb0k">3.50</td>
+                            <td class="tg-jb0k">57.15</td>
+                            <td class="tg-jb0k">4.35</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Santos et al.</td>
+                            <td class="tg-jb0k">22.56</td>
+                            <td class="tg-jb0k">2.68</td>
+                            <td class="tg-jb0k">18.23</td>
+                            <td class="tg-jb0k">3.53</td>
+                            <td class="tg-jb0k">53.51</td>
+                            <td class="tg-jb0k">4.76</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Liu et al.</td>
+                            <td class="tg-jb0k">30.89</td>
+                            <td class="tg-jb0k">3.27</td>
+                            <td class="tg-jb0k">28.00</td>
+                            <td class="tg-jb0k">4.11</td>
+                            <td class="tg-jb0k">56.97</td>
+                            <td class="tg-jb0k">6.15</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">CEVR (Ours)</td>
+                            <td class="tg-eiei"><p style="color:red;"><b>34.67</b></p></td>
+                            <td class="tg-jb0k">3.50</td>
+                            <td class="tg-eiei"><p style="color:red;"><b>30.04</b></p></td>
+                            <td class="tg-jb0k">4.45</td>
+                            <td class="tg-eiei"><p style="color:red;"><b>59.00</b></p></td>
+                            <td class="tg-jb0k">5.78</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k" rowspan="6">HDREye</td>
+                            <td class="tg-jb0k">DrTMO</td>
+                            <td class="tg-jb0k">23.68</td>
+                            <td class="tg-jb0k">3.27</td>
+                            <td class="tg-jb0k">19.97</td>
+                            <td class="tg-jb0k">4.11</td>
+                            <td class="tg-jb0k">46.67</td>
+                            <td class="tg-jb0k">5.81</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Deep chain HDRi</td>
+                            <td class="tg-jb0k">25.77</td>
+                            <td class="tg-jb0k">2.44</td>
+                            <td class="tg-jb0k">22.62</td>
+                            <td class="tg-jb0k">3.39</td>
+                            <td class="tg-jb0k">49.80</td>
+                            <td class="tg-jb0k">5.97</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Deep recursive HDRI</td>
+                            <td class="tg-jb0k">26.28</td>
+                            <td class="tg-jb0k">2.70</td>
+                            <td class="tg-jb0k">24.62</td>
+                            <td class="tg-jb0k">2.90</td>
+                            <td class="tg-jb0k">52.63</td>
+                            <td class="tg-jb0k">4.84</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Santos et al.</td>
+                            <td class="tg-jb0k">19.89</td>
+                            <td class="tg-jb0k">2.46</td>
+                            <td class="tg-jb0k">19.00</td>
+                            <td class="tg-jb0k">3.06</td>
+                            <td class="tg-jb0k">49.97</td>
+                            <td class="tg-jb0k">5.44</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">Liu et al.</td>
+                            <td class="tg-jb0k">26.25</td>
+                            <td class="tg-jb0k">3.08</td>
+                            <td class="tg-jb0k">24.67</td>
+                            <td class="tg-jb0k">3.54</td>
+                            <td class="tg-jb0k">50.33</td>
+                            <td class="tg-jb0k">6.67</td>
+                          </tr>
+                          <tr>
+                            <td class="tg-jb0k">CEVR (Ours)</td>
+                            <td class="tg-eiei"><p style="color:red;"><b>26.54</b></p></td>
+                            <td class="tg-jb0k">3.10</td>
+                            <td class="tg-eiei"><p style="color:red;"><b>24.81</b></p></td>
+                            <td class="tg-jb0k">2.91</td>
+                            <td class="tg-eiei"><p style="color:red;"><b>53.15</b></p></td>
+                            <td class="tg-jb0k">4.91</td>
+                          </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <p class="text-justify">
+                      Compared to other existing methods, our work demonstrates competitive performance.
+                    </p>
+                </div>
+              </div>
+        </div>
+
+<br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <!-- <div class="form-group col-md-30 col-md-offset-1"> -->
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@inproceedings{cevr_2023,
+  title={},
+  author={},
+  booktitle={},
+  year={2025}
+}</textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                This work was supported in part by the National Science and Technology Council (NSTC) under grants 112-2221-E-A49-090-MY3, 111-2628-E-A49-025-MY3, 112-2634-F-006-002, and 113-2640-E-006-006. This work was funded in part by MediaTek.
+                    <br><br>
+                The website template was borrowed from <a href="https://jonbarron.info/zipnerf/">Zip-NeRF</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
